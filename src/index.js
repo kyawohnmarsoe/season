@@ -14,28 +14,31 @@ class App extends React.Component {
         )
    }
 
+   renderContent(){
+    return(
+        <div>
+            { 
+                this.state.lat && !this.state.err ?
+                <SeasonDisplay lat={this.state.lat} /> :
+                null
+            }
+            { 
+                !this.state.lat && this.state.err ?
+                <div>{this.state.err}</div> :
+                null
+            }
+            { 
+                !this.state.lat && !this.state.err ?
+                <Spinner message="Please Allow Location"/> :
+                null
+            }
+        </div>
+    )
+}
     render(){
         return(
             <div>
-                { 
-                    this.state.lat && !this.state.err ?
-                    <SeasonDisplay lat={this.state.lat} /> :
-                    null
-                }
-                { 
-                    !this.state.lat && this.state.err ?
-                    <div>{this.state.err}</div> :
-                    null
-                }
-
-
-                { 
-                    !this.state.lat && !this.state.err ?
-                    <Spinner message="Please Allow Location"/> :
-                    null
-                }
-                 
-                
+              {this.renderContent()}
             </div>
         )
     }
